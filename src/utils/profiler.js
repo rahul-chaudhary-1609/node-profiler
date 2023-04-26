@@ -22,7 +22,6 @@ export default function profiler(params={}){
                 profile.export((error, result) =>{
                     fs.writeFileSync(`${this.outputDir}/${this.title}.cpuprofile`, result);
                     profile.delete();
-                    profile
                     console.log(profile.getHeader())
                     console.log(profile.startTime, new Date(profile.startTime))
                     // for(let node of profile.nodes){
