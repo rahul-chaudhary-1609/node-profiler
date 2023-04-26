@@ -1,26 +1,16 @@
 import Express from "express";
-import fs from 'fs';
-import v8Profiler from "v8-profiler-next";
+import { SERVER_CONFIG } from "./constants.js";
+import routes from "./src/routes.js";
 
-const title = "pro"
 
-const App = new Express();
-v8Profiler.setGenerateType(1);
+const app = new Express();
 
-App.get('/',(req,res)=>{
-    v8Profiler.startProfiling(title, true);
-    for(let i=0; i<10000;i++){
-        console.log("i",i)
+app.use('/v1',routes);
+
+app.listen(SERVER_CONFIG.port,(err)=>{
+    if(err){
+        console.log("Error occurred during server startup",err)
+    }else{
+        console.log(`Server Started on ${SERVER_CONFIG.port}`)
     }
-    const profile = v8Profiler.stopProfiling(title);
-    profile.export(function (error, result) {
-        fs.writeFileSync(`${title}.cpuprofile`, result);
-        profile.delete();
-    });
-    res.send("Ok")
-})
-
-
-App.listen(8011,()=>{
-    console.log("Server Started")
-})
+}) 
