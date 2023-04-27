@@ -15,9 +15,10 @@ TestController.normalTask = async function(req,res,next){
 
 TestController.complexTask = async function(req,res,next){
     try {
-        let responseData = await TestService.normalTask(req.params);
+        let responseData = await TestService.complexTask(req.params);
         ApiResponse.success(req,res,responseData,"success",200);
     } catch (error) {
+        throw new Error("Test error controller")
         ApiResponse.error(req,res,error,`Error in 'complexTaskController'`,500)
     }
 }

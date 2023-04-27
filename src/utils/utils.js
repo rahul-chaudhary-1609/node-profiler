@@ -6,7 +6,7 @@ export const ApiResponse = {
             data:data
         }
 
-        return res.json(response);
+        return res.sendStatus(res_code).json(response);
     },
 
     error: function(req,res,data,message,res_code){
@@ -16,6 +16,6 @@ export const ApiResponse = {
             data:data
         }
 
-        return res.json(response);
+        return res.sendStatus(res_code).json(response);
     }
 }

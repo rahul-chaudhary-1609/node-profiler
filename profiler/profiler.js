@@ -1,6 +1,6 @@
 import fs from 'fs';
 import v8Profiler from 'v8-profiler-next';
-import { PROFILING_CONFIG } from '../../constants.js';
+import { PROFILING_CONFIG } from '../constants.js';
 
 export default function profiler(params={}){
     console.log(params)

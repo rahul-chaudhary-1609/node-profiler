@@ -1,24 +1,28 @@
-import profiler from "../../../utils/profiler.js";
+import { Logger } from "../../../../logger/logger.js";
+import profiler from "../../../../profiler/profiler.js";
+import { addData } from "../models/testTable.js";
+
 
 const TestService = {};
 
 TestService.normalTask = async function(params){
     let title = `${Date.now()}`;
     profiler({title}).start();
-    console.log(params)
-    for(let i=0;i<=1000;i++){console.log(i)} 
-    console.log(params)
+    let query={
+        name:params.name,
+        age:params.age
+    }
+    const responseData = [];
+    for(let i=0; i<=10; i++){
+        responseData.push(await addData(query))
+    }
+    
     profiler({title}).stop();
-    return params;
+    return responseData;
 }
 
 TestService.complexTask = async function(params){
-    let title = `${Date.now()}`;
-    profiler({title}).start();
-    console.log(params)
-    for(let i=0;i<=10000;i++){console.log(i)} 
-    console.log(params)
-    profiler({title}).stop();
+    throw new Error("Test error service")
     return params;
 }
 
