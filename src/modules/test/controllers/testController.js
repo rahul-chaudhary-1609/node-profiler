@@ -3,9 +3,9 @@ import TestService from "../services/testService.js";
 
 const TestController = {};
 
-TestController.normalTask = async function(req,res,next){
+TestController.addData = async function(req,res,next){
     try {
-        let responseData = await TestService.normalTask(req.query);
+        let responseData = await TestService.addData(req.query);
         ApiResponse.success(req,res,responseData,"success",200);
     } catch (error) {
         console.log(error)
@@ -13,12 +13,11 @@ TestController.normalTask = async function(req,res,next){
     }
 }
 
-TestController.complexTask = async function(req,res,next){
+TestController.getData = async function(req,res,next){
     try {
-        let responseData = await TestService.complexTask(req.params);
+        let responseData = await TestService.getData(req.params);
         ApiResponse.success(req,res,responseData,"success",200);
     } catch (error) {
-        throw new Error("Test error controller")
         ApiResponse.error(req,res,error,`Error in 'complexTaskController'`,500)
     }
 }

@@ -3,7 +3,7 @@ import TestController from "./controllers/testController.js";
 
 const testRouter = Express.Router();
 
-testRouter.get('/normal',TestController.normalTask)
-testRouter.get('/complex/:t1',TestController.complexTask)
+testRouter.get('/add-data',TestController.addData)
+testRouter.get('/get-data/:id',TestController.getData)
 
 export default testRouter; 

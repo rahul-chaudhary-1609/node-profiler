@@ -1,5 +1,6 @@
 import sequelize, {Sequelize} from "sequelize";
 import { DB_CONFIG } from "../constants.js";
+import { Logger } from "../logger/logger.js";
 
 
 
@@ -18,7 +19,8 @@ export default function databaseConnection(params={}){
         initialize: function(){
             return new Sequelize({
                 ...this.dbOptions,
-                logging:console.log
+                benchmark: true,
+                logging: (sql,time)=>{Logger.debug(`"query": "${sql}",\n\t"Execution Time": "${time/1000}",`)},
             })
         },
         authenticate:function(){

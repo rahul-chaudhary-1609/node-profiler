@@ -36,3 +36,13 @@ export function addData(query){
         })
     })
 }
+
+export function getData(query){
+    return new Promise((resolve,reject)=>{
+        testTable.findAll(query).then((result)=>{
+            resolve(result);
+        }).catch((error)=>{
+            reject(error)
+        })
+    })
+}

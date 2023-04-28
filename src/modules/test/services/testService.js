@@ -1,13 +1,13 @@
 import { Logger } from "../../../../logger/logger.js";
 import profiler from "../../../../profiler/profiler.js";
-import { addData } from "../models/testTable.js";
+import { addData, getData } from "../models/testTable.js";
 
 
 const TestService = {};
 
-TestService.normalTask = async function(params){
+TestService.addData = async function(params){
     let title = `${Date.now()}`;
-    profiler({title}).start();
+    const profiler = Logger.startTimer();
     let query={
         name:params.name,
         age:params.age
@@ -17,13 +17,18 @@ TestService.normalTask = async function(params){
         responseData.push(await addData(query))
     }
     
-    profiler({title}).stop();
+    profiler.done({ message: `Logging message for ${title}`});
     return responseData;
 }
 
-TestService.complexTask = async function(params){
-    throw new Error("Test error service")
-    return params;
+TestService.getData = async function(params){
+    const profiler = Logger.startTimer();
+    // Logger.profile("test")
+    let query = {}
+    let response = await getData(query);
+    profiler.done({ message: 'Logging message' });
+    // Logger.profile("test",{level:"debug"})
+    return response;
 }
 
 export default  TestService;
